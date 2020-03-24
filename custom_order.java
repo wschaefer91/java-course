@@ -3,15 +3,27 @@
 import java.util.Scanner;  // Needed for the Scanner class to read input
 
 public class custom_order {
+	
+    // NEXT STEP
+
+	static int addCost(int totalCost, int cost) {
+		totalCost += cost;
+		return totalCost;
+		}
+	
+	static String addItem(String addOnList, String item) {
+		addOnList += item;
+		return addOnList;
+		}
 
     // STEP 1 PRINTING HELLO WORLD TO CONSOLE
     public static void main(String[] args) {
-        
+
     // System.out.println("Hello World!"); // print Hello World to console
         
     // TEST CODE
-    
-    // STEP 2 CREATE A SCANNER OBEJCT, DECLARE VARAIBLES, & PRINT STATEMENTS
+
+    // STEP 2 CREATE A SCANNER OBJECT, DECLARE VARIABLES, & PRINT STATEMENTS
 	  
     	Scanner keyboard = new Scanner (System.in);
     	
@@ -25,6 +37,10 @@ public class custom_order {
     	double cost = 15.00; // Cost of cake and cupcakes
     	final double TAX_RATE = .08; // Sales tax rate
     	double tax; // Amount of tax
+    	
+    	int totalCost = 0; // Cost of order
+    	String addOnList = ""; // List of items
+
 
     // Introduce shop and prompt user to input first name
       
@@ -70,6 +86,12 @@ public class custom_order {
     	System.out.println("What type of FROSTING do you want? ");
     	System.out.println("Vanilla, Chocolate, Strawberry or Coco");
     	frostingType = keyboard.nextLine(); 
+    	
+    	if(frostingType != "no") {
+    		totalCost = addCost(totalCost, 2);
+    		addOnList = addItem(addOnList, frostingType);
+    		addOnList+=", ";
+    	}
       
     //TEST CODE
       
@@ -79,6 +101,12 @@ public class custom_order {
     	System.out.println("Mocha, Mint, Lemon, Caramel or Raspberry");
     	fillingType = keyboard.nextLine();
     	
+    	if(fillingType != "no") {
+    		totalCost = addCost(totalCost, 2);
+    		addOnList = addItem(addOnList, fillingType);
+    		addOnList+=", ";
+    	}
+    	
     // TEST CODE
       
     // STEP 8 PROMPT USER TO CHOOSE TOPPINGS
@@ -86,6 +114,11 @@ public class custom_order {
     	System.out.println("What type of TOPPINGS do you want? ");
     	System.out.println("Sprinkles, Cinnamon, Cocoa, Nuts");
     	toppings = keyboard.nextLine();
+    	
+    	if(toppings != "no") {
+    		totalCost = addCost(totalCost, 2);
+    		addOnList = addItem(addOnList, toppings);
+    	}
       
     // TEST CODE
       
@@ -104,10 +137,11 @@ public class custom_order {
       
     // STEP 10 DISPLAY COST AND SALES TAX
   
-    	System.out.printf("The cost of your order is: $%.2f\n", cost);
-    	tax = cost * TAX_RATE;
-    	System.out.printf("The tax is: $%.2f\n", tax);
-    	System.out.printf("The total due is: $%.2f\n", (tax + cost));
+    	System.out.println("The cost of your order is: $" + (cost + totalCost));
+    	tax = totalCost * TAX_RATE;
+    	System.out.println("The tax is: $" + tax);
+    	System.out.println("The total due is: $" + (tax + totalCost));
+    	System.out.println("Extras: " + addOnList);
     	
     }   
 }
